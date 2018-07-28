@@ -21,11 +21,15 @@ const db = pgp(connectionString);
 function readRecipes(req, res, next) {
   db.any("select * from recipes")
     .then(data => {
-      res.status(200).json({
-        status: "success",
-        data,
-        message: "Retrieved all recipes"
-      });
+      res.render("all", { data });
+    })
+    .catch(err => next(err));
+}
+
+function readOneRecipe(req, res, next) {
+  db.any(`select * from recipes where id = ${req.params.id}`)
+    .then(data => {
+      res.render("one", { data });
     })
     .catch(err => next(err));
 }
@@ -36,10 +40,7 @@ function createRecipe(req, res, next) {
     [req.body.title, req.body.style, req.body.ingredients, req.body.process]
   )
     .then(() => {
-      res.status(200).json({
-        status: "success",
-        message: "Inserted one recipe"
-      });
+      res.redirect("/recipes");
     })
     .catch(err => next(err));
 }
@@ -68,16 +69,15 @@ function deleteRecipe(req, res, next) {
   const recipeID = req.params.id;
   db.result("delete from recipes where id = $1", recipeID)
     .then(result => {
-      res.status(200).json({
-        status: "success",
-        message: `Deleted ${result.rowCount} recipe`
-      });
+      res.redirect("/recipes");
+      // alert(`Deleted ${result.rowCount} recipe`);
     })
     .catch(err => next(err));
 }
 
 module.exports = {
   readRecipes,
+  readOneRecipe,
   createRecipe,
   updateRecipe,
   deleteRecipe

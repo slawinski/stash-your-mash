@@ -1,0 +1,16 @@
+<a href="/new">
+    <button>New Recipe</button>
+</a>
+
+<ul>
+    {{# each data}} {{# each this}}
+    <li>{{@key}}: {{this}}</li>
+    {{/each}} {{/each}}
+</ul>
+
+<form action="/recipes/{{data.[0].id}}?_method=DELETE" method="post">
+    <a href="/recipes/{{data.[0].id}}/edit" type="button" class="btn btn-default btn-warning">Edit</a>
+    <button type="submit" class="btn btn-default btn-danger">
+        Delete
+    </button>
+</form>

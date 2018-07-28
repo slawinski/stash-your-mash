@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const sassMiddleware = require("node-sass-middleware");
 const exphbs = require("express-handlebars");
+const methodOverride = require("method-override");
 
 const indexRouter = require("./routes/index");
 
@@ -36,6 +37,7 @@ app.use(
   })
 );
 app.use(express.static(path.join(__dirname, "public")));
+app.use(methodOverride("_method"));
 
 app.use("/", indexRouter);
 

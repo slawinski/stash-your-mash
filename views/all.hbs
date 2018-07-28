@@ -1,0 +1,11 @@
+<a href="/new">
+  <button>New Recipe</button>
+</a>
+
+<ul>
+  {{# each data}}
+  <a href="/recipes/{{id}}">
+    <li>{{title}}</li>
+  </a>
+  {{/each}}
+</ul>
