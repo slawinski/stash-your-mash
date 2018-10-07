@@ -1,5 +1,12 @@
 # Stash Your Mash
 
+Beer recipe vault inspired by https://www.youtube.com/watch?v=WYa47JkZH_U
+
+TODO:
+- Dockerize
+- Configure Webpack
+- Push to heroku
+
 ## Step one
 
 ```
